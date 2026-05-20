@@ -1,0 +1,45 @@
+Patient: Eleanor Whitfield
+DOB: 1956-11-04
+MRN: NSH-907782
+Phone: 902-555-0177
+Email: eleanor.whitfield@example.com
+Address: 88 Spring Garden Road, Halifax, NS B3J 1A5
+Health Card: NS-9988-776-655
+Primary Provider: Dr. Aaron Becker
+Consulting Provider: Dr. Priya Raman
+Cardiology Consult: Dr. Marcus Holloway
+Visit Date: April 28, 2026
+Follow-up: May 15, 2026
+Next Cardiology: June 2, 2026
+
+Clinical Note:
+Elderly patient with longstanding hypertension, type 2 diabetes, chronic
+kidney disease (stage 3), and prior myocardial infarction in 2019. Presents
+today with intermittent chest tightness on exertion, mild shortness of breath
+climbing one flight of stairs, and bilateral lower extremity swelling
+worsening over the past two weeks. Reports occasional dizziness on standing.
+
+Current Medications:
+- Metformin 1000 mg twice daily
+- Insulin glargine at bedtime
+- Warfarin (target INR 2.0-3.0)
+- Lisinopril 20 mg daily
+- Atorvastatin 40 mg nightly
+- Furosemide 40 mg daily
+
+Examination:
+Blood pressure elevated. Mild bibasilar crackles on lung auscultation. S3
+gallop noted. Bilateral pitting edema to mid-shin. No focal neurological
+deficits. Carotids without bruit.
+
+Recent labs reviewed with patient. Discussed possible decompensation of
+chronic heart failure on background of CKD and ischemic heart disease.
+
+Plan:
+- Increase Furosemide pending repeat labs
+- Repeat BMP and BNP
+- ECG today
+- Cardiology follow-up with Dr. Marcus Holloway on June 2, 2026
+- Diabetes review with Dr. Priya Raman next month
+- Patient counselled on red-flag symptoms warranting urgent assessment
+- Follow-up with Dr. Aaron Becker on May 15, 2026

@@ -1,0 +1,13 @@
+{
+  "guideline_id": "afib_management",
+  "title": "Atrial Fibrillation: rate vs rhythm and anticoagulation",
+  "version": "2024.2 (synthetic / demo only)",
+  "applies_to": ["atrial fibrillation", "afib", "rapid ventricular response"],
+  "key_recommendations": [
+    "In stable patients with new-onset AF, rate control (beta blocker or non-DHP calcium channel blocker) is reasonable first-line. Rhythm control reserved for symptomatic patients despite rate control, or younger patients with intolerable symptoms.",
+    "Anticoagulation decisions follow CHADS2-VASc; score >= 2 in men or >= 3 in women indicates anticoagulation.",
+    "Amiodarone is effective for rhythm control but has significant drug interactions and long-term toxicity. Consider DOAC or beta blocker alternatives first.",
+    "Echocardiography to assess LV function, valvular disease, and atrial size is indicated within 2 weeks of new AF diagnosis."
+  ],
+  "citation_label": "Synthetic AFib Guideline v2024.2"
+}

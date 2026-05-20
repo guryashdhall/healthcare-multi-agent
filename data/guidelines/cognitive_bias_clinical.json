@@ -1,0 +1,14 @@
+{
+  "guideline_id": "cognitive_bias_clinical",
+  "title": "Cognitive biases in clinical reasoning",
+  "version": "2023.2 (synthetic / demo only)",
+  "applies_to": ["clinical reasoning", "diagnostic error", "bias"],
+  "key_recommendations": [
+    "Anchoring bias: clinging to initial impression despite later contradictory evidence. Mitigation - explicitly list 3 alternative diagnoses before finalizing.",
+    "Premature closure: stopping the differential too early. Mitigation - 'what else could this be?' as a hard checkpoint.",
+    "Availability bias: recent or memorable cases inflate perceived probability. Mitigation - reason from base rates first.",
+    "Confirmation bias: weighting evidence that supports the working dx. Mitigation - actively search for refuting evidence.",
+    "Iatrogenesis blindness: failure to consider 'is this caused by something we did?' Mitigation - in any new symptom, review the med list within 30 days of onset."
+  ],
+  "citation_label": "Synthetic Clinical Reasoning Guideline v2023.2"
+}

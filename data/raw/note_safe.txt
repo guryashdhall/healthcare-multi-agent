@@ -1,0 +1,21 @@
+Visit Type: Outpatient follow-up
+
+Patient is a middle-aged adult with a documented history of moderate persistent
+asthma, currently maintained on inhaled corticosteroid therapy.
+
+Subjective:
+Reports stable respiratory status over the past four weeks. No nocturnal cough,
+no wheeze, no rescue inhaler use beyond baseline. Activity tolerance unchanged.
+Denies fever, chest tightness, or new symptoms.
+
+Objective:
+Vitals within expected range. Lungs clear to auscultation bilaterally. No
+accessory muscle use. Oxygen saturation within target range on room air.
+
+Assessment:
+Asthma well-controlled on current regimen. No acute concerns.
+
+Plan:
+Continue current inhaled corticosteroid. Reinforce trigger avoidance.
+Routine follow-up in three months. Patient educated on action plan and when
+to seek urgent care.

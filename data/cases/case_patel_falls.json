@@ -1,0 +1,68 @@
+{
+  "case_id": "case_patel_falls",
+  "label": "Patel · 76M · falls + cognitive decline",
+  "subtitle": "Geriatrics clinic · medication review",
+  "tag": "Polypharmacy · iatrogenic",
+  "tag_color": "amber",
+  "demographics": {
+    "patient_name": "Arvind Patel",
+    "age": 76,
+    "sex": "M",
+    "mrn": "NSH-661024",
+    "dob": "1949-06-29",
+    "phone": "902-555-0301",
+    "address": "23 Robie Street, Halifax, NS B3J 1L9"
+  },
+  "presenting_complaint": "Three falls in the last six weeks, two unwitnessed. Daughter reports progressive confusion, dry mouth, constipation, and daytime sleepiness over the past three months. Patient himself denies symptoms. No headaches. No syncope. Sleeping more.",
+  "history": {
+    "past_medical": [
+      "Benign prostatic hyperplasia",
+      "Insomnia",
+      "Overactive bladder",
+      "Mild depression",
+      "Allergic rhinitis",
+      "Hypertension",
+      "Mild osteoarthritis"
+    ],
+    "social": "Widower. Lives alone with daughter visiting twice weekly. Was independently mobile and driving 4 months ago.",
+    "family": "Father died age 78 of pneumonia. Mother had dementia."
+  },
+  "current_medications": [
+    {"name": "Oxybutynin", "dose": "5 mg", "frequency": "twice daily", "indication": "Overactive bladder"},
+    {"name": "Diphenhydramine", "dose": "50 mg", "frequency": "at bedtime", "indication": "Insomnia (self-purchased OTC)"},
+    {"name": "Amitriptyline", "dose": "25 mg", "frequency": "at bedtime", "indication": "Depression and chronic pain"},
+    {"name": "Tamsulosin", "dose": "0.4 mg", "frequency": "daily", "indication": "BPH"},
+    {"name": "Hydrochlorothiazide", "dose": "25 mg", "frequency": "daily", "indication": "Hypertension"},
+    {"name": "Lorazepam", "dose": "1 mg", "frequency": "PRN anxiety", "indication": "Used most nights"},
+    {"name": "Loratadine", "dose": "10 mg", "frequency": "daily", "indication": "Allergic rhinitis"},
+    {"name": "Acetaminophen", "dose": "500 mg", "frequency": "PRN", "indication": "Osteoarthritis"}
+  ],
+  "vitals": {
+    "blood_pressure": "126/74 standing, 152/88 supine (orthostatic)",
+    "heart_rate": "82 bpm",
+    "respiratory_rate": "16/min",
+    "oxygen_saturation": "97% on room air",
+    "temperature": "36.5 C"
+  },
+  "examination": "Alert but slow to respond. MMSE 22/30 (down from 28 six months ago). Dry oral mucosa. Pupils mid-dilated. No focal neurological deficits. Postural drop 26 mmHg systolic on standing. Gait slow with shuffling, mild en-bloc turning.",
+  "labs": {
+    "Creatinine": "1.3 mg/dL",
+    "eGFR": "52 mL/min/1.73m^2",
+    "Sodium": "134 mmol/L",
+    "Potassium": "3.9 mmol/L",
+    "TSH": "2.4 mIU/L",
+    "B12": "412 pg/mL"
+  },
+  "clinicians_initial_plan": [
+    "Consider rivastigmine for suspected early dementia",
+    "Refer to physiotherapy for falls prevention",
+    "Repeat MMSE in 3 months",
+    "Continue current medications"
+  ],
+  "intentional_pitfalls_for_demo": [
+    "Patient is on FIVE strong anticholinergic agents (oxybutynin, diphenhydramine, amitriptyline, lorazepam, loratadine). Anticholinergic Cognitive Burden score >= 6.",
+    "The 'dementia' presentation, dry mouth, orthostasis, sleepiness, and falls are highly likely iatrogenic from the anticholinergic + sedative load - this is reversible.",
+    "Adding a cholinesterase inhibitor (rivastigmine) on top of strong anticholinergics is pharmacologically contradictory.",
+    "Deprescribing strategy should precede dementia work-up: stop diphenhydramine, taper amitriptyline + lorazepam, swap oxybutynin to mirabegron, reassess in 6-8 weeks."
+  ]
+}

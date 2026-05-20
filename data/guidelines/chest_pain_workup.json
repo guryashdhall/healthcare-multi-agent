@@ -1,0 +1,14 @@
+{
+  "guideline_id": "chest_pain_workup",
+  "title": "Acute chest pain: differential and red-flag workup",
+  "version": "2024.0 (synthetic / demo only)",
+  "applies_to": ["chest pain", "dyspnea", "pleuritic pain", "acute coronary syndrome", "pulmonary embolism"],
+  "key_recommendations": [
+    "Use a structured pretest probability tool (HEART for ACS, Wells/PERC for PE) BEFORE committing to a single diagnostic pathway.",
+    "Pleuritic character, hypoxia, recent immobilization, and elevated D-dimer in any combination raise PE suspicion - CT pulmonary angiogram is the test of choice (V/Q if CT contraindicated).",
+    "Aortic dissection differentials: tearing pain radiating to back, BP differential between arms, mediastinal widening on CXR.",
+    "Troponin elevation does not exclude PE - right heart strain from PE can elevate troponin.",
+    "Avoid premature closure on the most-feared diagnosis. Imaging-first when probability is moderate."
+  ],
+  "citation_label": "Synthetic Chest Pain Guideline v2024.0"
+}

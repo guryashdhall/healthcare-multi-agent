@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>St. Demo Health · Clinical AI Co-Pilot</title>
+  <link rel="stylesheet" href="/static/styles.css?v=2026051101" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">+</div>
+        <div class="brand-text">
+          <div class="hospital">St. Demo Health</div>
+          <div class="subhospital">Clinical AI Co-Pilot · PHI-safe foundation</div>
+        </div>
+      </div>
+      <div class="synth-banner" title="Synthetic data only">
+        <span class="dot"></span>
+        SYNTHETIC DATA ONLY · DEMO ENVIRONMENT
+      </div>
+      <div class="user-chip">
+        <span class="user-avatar">DR</span>
+        <div class="user-meta">
+          <div class="user-name">Dr. Demo, MD</div>
+          <div class="user-role">Internal Medicine</div>
+        </div>
+        <span class="conn-dot" id="conn-dot" title="Server status"></span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT RAIL -->
+      <aside class="rail rail-left">
+        <div class="rail-title">Case Worklist</div>
+        <div class="rail-sub">Synthetic encounters</div>
+        <div class="case-list" id="case-list">
+          <div class="loading">Loading worklist…</div>
+        </div>
+        <button class="paste-btn" id="open-paste">+ Paste a case</button>
+      </aside>
+
+      <!-- CENTER CANVAS -->
+      <section class="canvas">
+        <nav class="tabs" role="tablist">
+          <button class="tab active" data-tab="case">Case</button>
+          <button class="tab" data-tab="copilot">Co-Pilot Workspace</button>
+          <button class="tab" data-tab="plan">Plan</button>
+          <button class="tab" data-tab="safety">Safety &amp; Audit</button>
+        </nav>
+
+        <!-- TAB: Case -->
+        <div class="tab-panel active" data-panel="case">
+          <div class="case-header">
+            <div>
+              <div class="case-title" id="case-title">Select a case</div>
+              <div class="case-sub" id="case-sub">Pick a row in the worklist on the left</div>
+            </div>
+            <div class="case-tag" id="case-tag"></div>
+          </div>
+          <div class="case-body" id="case-body">
+            <div class="case-empty">No case selected.</div>
+          </div>
+        </div>
+
+        <!-- TAB: Co-Pilot Workspace -->
+        <div class="tab-panel" data-panel="copilot">
+          <div class="copilot-toolbar">
+            <span class="copilot-legend">
+              <span class="dot dot-gray"></span> Idle
+              <span class="dot dot-yellow"></span> Reasoning
+              <span class="dot dot-green"></span> Done
+              <span class="dot dot-red"></span> Error
+            </span>
+            <span class="copilot-engine" id="copilot-engine-tag"></span>
+          </div>
+          <div class="agent-grid" id="agent-grid">
+            <!-- six specialist panels rendered dynamically -->
+          </div>
+          <div class="orchestrator-panel" id="orchestrator-panel">
+            <div class="orchestrator-head">
+              <div class="orchestrator-title">Orchestrator</div>
+              <div class="orchestrator-sub">Synthesizing once all specialists complete</div>
+              <span class="agent-light" id="orch-light"></span>
+            </div>
+            <pre class="agent-stream" id="orch-stream"></pre>
+          </div>
+        </div>
+
+        <!-- TAB: Plan -->
+        <div class="tab-panel" data-panel="plan">
+          <div class="plan-toggle">
+            <button class="toggle-btn active" data-view="clinician">Clinician view (re-hydrated)</button>
+            <button class="toggle-btn" data-view="llm">What the LLM produced (placeholders)</button>
+          </div>
+          <div class="plan-summary" id="plan-summary">Run the co-pilot to populate.</div>
+          <div class="plan-section">
+            <div class="plan-section-title">Cross-agent flags</div>
+            <div id="cross-flags" class="cross-flags">—</div>
+          </div>
+          <div class="plan-section">
+            <div class="plan-section-title">Ranked actions</div>
+            <ol id="ranked-actions" class="ranked-actions"></ol>
+          </div>
+          <div class="plan-section">
+            <div class="plan-section-title">Patient-facing summary</div>
+            <div id="patient-facing" class="patient-facing"></div>
+          </div>
+        </div>
+
+        <!-- TAB: Safety & Audit -->
+        <div class="tab-panel" data-panel="safety">
+          <div class="safety-explainer">
+            Every agent sees only the de-identified case. The clinician view above is re-hydrated server-side. The audit log below never contains raw PHI.
+          </div>
+          <div class="audit-toolbar">
+            <button class="primary" id="audit-refresh">Refresh</button>
+            <button class="primary" id="audit-verify">Verify no raw PHI</button>
+            <span id="audit-assert" class="audit-assert"></span>
+          </div>
+          <pre class="audit-body" id="audit-body">No audit events yet.</pre>
+        </div>
+      </section>
+
+      <!-- RIGHT RAIL -->
+      <aside class="rail rail-right">
+        <div class="rail-section">
+          <div class="rail-title">Engine</div>
+          <label class="radio">
+            <input type="radio" name="engine" value="azure_openai" checked />
+            <span>Azure OpenAI (live stream)</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="engine" value="simulated" />
+            <span>Offline Simulator</span>
+          </label>
+          <div class="rail-hint" id="engine-hint"></div>
+        </div>
+
+        <div class="rail-section">
+          <button class="run-btn" id="run-btn" disabled>Run Co-Pilot</button>
+        </div>
+
+        <div class="rail-section">
+          <div class="rail-title">Last run</div>
+          <div class="kv" id="last-run">
+            <div class="kv-row"><span>Status</span><span>—</span></div>
+          </div>
+        </div>
+
+        <div class="rail-section">
+          <div class="rail-title">Cross-agent findings</div>
+          <div id="cross-flags-rail" class="cross-flags-rail">—</div>
+        </div>
+
+        <div class="rail-section">
+          <div class="rail-title">Live event log</div>
+          <pre class="event-log" id="event-log"></pre>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      Six Claude agents. One orchestrator. PHI safety as foundation. Built end-to-end with Claude Code.
+    </footer>
+  </div>
+
+  <!-- Paste-case modal -->
+  <div class="modal" id="paste-modal" hidden>
+    <div class="modal-card">
+      <div class="modal-title">Paste a clinical case</div>
+      <div class="modal-sub">
+        Synthetic data only. Either paste a JSON case (recommended) or free-text
+        clinical content; we will wrap it into the case schema for the agents.
+      </div>
+      <textarea id="paste-text" placeholder='Paste case JSON or free-text clinical note here&#10;{ "demographics": {...}, "presenting_complaint": "...", ... }'></textarea>
+      <div class="modal-actions">
+        <button class="ghost" id="paste-cancel">Cancel</button>
+        <button class="primary" id="paste-load">Load into workbench</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js?v=2026051101"></script>
+</body>
+</html>

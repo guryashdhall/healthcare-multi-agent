@@ -1,0 +1,15 @@
+{
+  "guideline_id": "warfarin_interactions",
+  "title": "Warfarin drug-drug interactions: high-yield list",
+  "version": "2023.4 (synthetic / demo only)",
+  "applies_to": ["warfarin", "anticoagulation", "INR management"],
+  "key_recommendations": [
+    "Amiodarone potentiates warfarin via CYP2C9 and CYP3A4 inhibition. Expect INR to rise within 5-10 days; reduce warfarin dose by 30-50% pre-emptively or monitor INR every 3-4 days for 2 weeks.",
+    "Trimethoprim-sulfamethoxazole strongly potentiates warfarin via CYP2C9 inhibition.",
+    "Metronidazole, ciprofloxacin, and fluconazole all elevate INR.",
+    "NSAIDs do not affect INR directly but increase bleeding risk via platelet inhibition and GI mucosal injury.",
+    "Acetaminophen at doses >2 g/day chronically can modestly elevate INR.",
+    "Rifampin, carbamazepine, and St John's Wort lower INR via CYP induction."
+  ],
+  "citation_label": "Synthetic Warfarin Interactions Guideline v2023.4"
+}

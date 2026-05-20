@@ -1,0 +1,60 @@
+{
+  "case_id": "case_singh_chest_pain",
+  "label": "Singh · 54M · chest pain + dyspnea",
+  "subtitle": "ED triage · sudden-onset pleuritic pain",
+  "tag": "Acute · differential trap",
+  "tag_color": "red",
+  "demographics": {
+    "patient_name": "Rajiv Singh",
+    "age": 54,
+    "sex": "M",
+    "mrn": "NSH-441208",
+    "dob": "1971-04-02",
+    "phone": "902-555-0188",
+    "address": "12 Oxford Street, Halifax, NS B3H 2K1"
+  },
+  "presenting_complaint": "Sudden-onset right-sided pleuritic chest pain 4 hours ago, worse on inspiration. Dyspnea climbing one flight of stairs. Returned 6 days ago from a 10-hour flight from Mumbai. Mild leg discomfort but no obvious swelling. Mild non-productive cough. No diaphoresis. No radiation to arm/jaw.",
+  "history": {
+    "past_medical": [
+      "Hypertension, controlled",
+      "Hyperlipidemia"
+    ],
+    "social": "Former smoker (quit 2018, 15 pack-years). Sedentary office job.",
+    "family": "Father MI at 62."
+  },
+  "current_medications": [
+    {"name": "Amlodipine", "dose": "5 mg", "frequency": "daily", "indication": "Hypertension"},
+    {"name": "Atorvastatin", "dose": "20 mg", "frequency": "nightly", "indication": "Hyperlipidemia"}
+  ],
+  "vitals": {
+    "blood_pressure": "138/88 mmHg",
+    "heart_rate": "108 bpm regular",
+    "respiratory_rate": "22/min",
+    "oxygen_saturation": "93% on room air",
+    "temperature": "37.2 C"
+  },
+  "examination": "Mildly tachypneic. Lungs clear with slight diminished breath sounds right base. Heart regular, no murmurs. No JVD. Right calf without obvious swelling but mildly tender on palpation. Wells score for PE: 4.5 (moderate probability).",
+  "labs": {
+    "Troponin_I": "0.02 ng/mL (normal <0.04)",
+    "D_dimer": "1850 ng/mL (elevated, normal <500)",
+    "WBC": "9.8 x10^9/L",
+    "Creatinine": "0.9 mg/dL",
+    "BNP": "84 pg/mL",
+    "Hemoglobin": "14.6 g/dL"
+  },
+  "imaging_studies": {
+    "ECG": "Sinus tachycardia at 108, no ST changes, no S1Q3T3 pattern.",
+    "Chest_xray": "Reported as normal. No infiltrate, no pneumothorax."
+  },
+  "clinicians_initial_plan": [
+    "Working diagnosis: Acute coronary syndrome, low probability",
+    "Serial troponins q3h x2",
+    "Repeat ECG in 2 hours",
+    "Aspirin 325 mg",
+    "Admit to chest pain observation unit"
+  ],
+  "intentional_pitfalls_for_demo": [
+    "Premature closure on ACS despite pleuritic character, low-O2, recent long flight, elevated D-dimer, moderate Wells score for PE.",
+    "CT pulmonary angiogram is the indicated next step before ACS protocol commits the patient to inappropriate anticoagulation-vs-thrombolysis decisions."
+  ]
+}

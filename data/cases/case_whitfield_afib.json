@@ -1,0 +1,71 @@
+{
+  "case_id": "case_whitfield_afib",
+  "label": "Whitfield · 68F · new AFib + complex polypharmacy",
+  "subtitle": "Outpatient cardiology · presenting with palpitations",
+  "tag": "Hero case · polypharmacy",
+  "tag_color": "amber",
+  "demographics": {
+    "patient_name": "Eleanor Whitfield",
+    "age": 68,
+    "sex": "F",
+    "mrn": "NSH-907782",
+    "dob": "1957-08-14",
+    "phone": "902-555-0177",
+    "address": "88 Spring Garden Road, Halifax, NS B3J 1A5"
+  },
+  "presenting_complaint": "Two-day history of irregular palpitations, mild dyspnea on exertion, and one episode of near-syncope yesterday. No chest pain. No focal neurological symptoms.",
+  "history": {
+    "past_medical": [
+      "Hypertension (12 years)",
+      "Chronic kidney disease, stage 3 (eGFR 38)",
+      "Prior transient ischemic attack (2022, no residual deficit)",
+      "Hyperlipidemia"
+    ],
+    "social": "Non-smoker. Occasional alcohol. Lives alone. Self-medication management.",
+    "family": "Father had stroke at 72. Mother type 2 diabetes."
+  },
+  "current_medications": [
+    {"name": "Warfarin", "dose": "5 mg", "frequency": "daily", "indication": "Stroke prevention post-TIA", "started": "2022-09"},
+    {"name": "Lisinopril", "dose": "20 mg", "frequency": "daily", "indication": "Hypertension"},
+    {"name": "Atorvastatin", "dose": "40 mg", "frequency": "nightly", "indication": "Hyperlipidemia"},
+    {"name": "Acetaminophen", "dose": "500 mg", "frequency": "PRN", "indication": "Mild knee osteoarthritis"}
+  ],
+  "vitals": {
+    "blood_pressure": "158/92 mmHg",
+    "heart_rate": "132 bpm, irregularly irregular",
+    "respiratory_rate": "18/min",
+    "oxygen_saturation": "96% on room air",
+    "temperature": "36.7 C"
+  },
+  "examination": "Alert and oriented. Irregularly irregular pulse. No JVD. Lungs clear bilaterally. No carotid bruits. Mild bilateral lower extremity edema. No focal neurological deficits. CHADS2-VASc score 4.",
+  "labs": {
+    "INR": "2.4 (within target 2.0-3.0)",
+    "Creatinine": "1.6 mg/dL",
+    "eGFR": "38 mL/min/1.73m^2",
+    "BUN": "24 mg/dL",
+    "Potassium": "4.2 mmol/L",
+    "Sodium": "138 mmol/L",
+    "TSH": "1.8 mIU/L",
+    "Hemoglobin": "12.4 g/dL",
+    "Platelets": "212 x10^9/L",
+    "ALT": "22 U/L",
+    "AST": "20 U/L"
+  },
+  "imaging_studies": {
+    "ECG": "Atrial fibrillation with rapid ventricular response, rate 128. No acute ST changes. No prior ECG for comparison on file.",
+    "Echocardiogram": "Last echo 2023: LVEF 55%, mild LA enlargement, no significant valvular disease."
+  },
+  "clinicians_initial_plan": [
+    "Diagnosis: New-onset atrial fibrillation with rapid ventricular response",
+    "Start amiodarone 200 mg three times daily for one week, then 200 mg daily for rhythm control",
+    "Continue warfarin 5 mg daily; rationale: existing anticoagulation, INR currently therapeutic",
+    "Add metoprolol tartrate 25 mg twice daily for rate control if amiodarone insufficient",
+    "Cardiology follow-up in 2 weeks",
+    "Repeat ECG in 1 week"
+  ],
+  "intentional_pitfalls_for_demo": [
+    "Amiodarone + warfarin: amiodarone potently inhibits CYP2C9 and CYP3A4, increasing warfarin AUC. INR likely to rise to 4.5+ within 5-10 days without preemptive warfarin dose reduction or replacement strategy.",
+    "Anchoring bias on rhythm control as default; rate control (metoprolol/diltiazem alone) is reasonable first-line per AHA/ACC 2023 guideline in stable patients.",
+    "CKD stage 3 affects digoxin and DOAC dosing if alternatives are considered."
+  ]
+}

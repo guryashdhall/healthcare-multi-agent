@@ -1,0 +1,14 @@
+{
+  "guideline_id": "anticoagulation_afib",
+  "title": "Anticoagulation in AF: DOAC vs warfarin",
+  "version": "2024.1 (synthetic / demo only)",
+  "applies_to": ["atrial fibrillation", "anticoagulation", "stroke prevention"],
+  "key_recommendations": [
+    "DOACs (apixaban, rivaroxaban, dabigatran, edoxaban) are preferred over warfarin in non-valvular AF except in mechanical valves, moderate-severe mitral stenosis, or eGFR <15.",
+    "Apixaban dose reduction (2.5 mg BID) if two of: age >=80, weight <=60 kg, creatinine >=1.5 mg/dL.",
+    "Rivaroxaban contraindicated if CrCl <15. Dose reduce to 15 mg daily if CrCl 15-50.",
+    "Switching from warfarin to DOAC: stop warfarin, start DOAC when INR < 2.0.",
+    "CHADS2-VASc score 2+ in men, 3+ in women, supports anticoagulation regardless of choice."
+  ],
+  "citation_label": "Synthetic AF Anticoagulation Guideline v2024.1"
+}

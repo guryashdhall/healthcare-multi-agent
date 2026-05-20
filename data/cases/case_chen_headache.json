@@ -1,0 +1,58 @@
+{
+  "case_id": "case_chen_headache",
+  "label": "Chen · 32F · severe headache",
+  "subtitle": "Urgent care · worst-of-life onset",
+  "tag": "Red-flag screening",
+  "tag_color": "red",
+  "demographics": {
+    "patient_name": "Linh Chen",
+    "age": 32,
+    "sex": "F",
+    "mrn": "NSH-203916",
+    "dob": "1993-12-18",
+    "phone": "902-555-0210",
+    "address": "47 Brunswick Street, Halifax, NS B3J 2G6"
+  },
+  "presenting_complaint": "Severe global headache starting abruptly 18 hours ago, peaking within minutes. Patient describes 'the worst headache of my life'. Two episodes of vomiting. Photophobia. Mild neck stiffness when looking down. No prior similar headaches. No recent trauma. No fever reported by patient but feels warm.",
+  "history": {
+    "past_medical": [
+      "Occasional tension headaches, never of this severity",
+      "Combined oral contraceptive use for 8 years"
+    ],
+    "social": "Non-smoker. Occasional alcohol. Works as graphic designer.",
+    "family": "Mother age 58 - migraines."
+  },
+  "current_medications": [
+    {"name": "Ethinyl estradiol + levonorgestrel", "dose": "30 mcg/150 mcg", "frequency": "daily", "indication": "Contraception"},
+    {"name": "Ibuprofen", "dose": "400 mg", "frequency": "PRN headache", "indication": "Headache"}
+  ],
+  "vitals": {
+    "blood_pressure": "142/88 mmHg",
+    "heart_rate": "98 bpm",
+    "respiratory_rate": "16/min",
+    "oxygen_saturation": "99% on room air",
+    "temperature": "37.6 C"
+  },
+  "examination": "Photophobic, prefers dim room. Mild nuchal rigidity on flexion. Kernig's sign equivocal. No focal motor or sensory deficits. Cranial nerves intact. Fundoscopy not performed. Patient very uncomfortable.",
+  "labs": {
+    "WBC": "11.2 x10^9/L (mildly elevated)",
+    "CRP": "8 mg/L",
+    "Glucose": "98 mg/dL",
+    "Creatinine": "0.7 mg/dL"
+  },
+  "imaging_studies": {
+    "CT_head_non_contrast": "Not yet performed."
+  },
+  "clinicians_initial_plan": [
+    "Working diagnosis: Severe migraine, first presentation",
+    "IV metoclopramide 10 mg",
+    "IV ketorolac 30 mg",
+    "Hydration, dim room",
+    "Discharge home with neurology follow-up if symptoms improve"
+  ],
+  "intentional_pitfalls_for_demo": [
+    "Thunderclap onset + worst-of-life + nuchal rigidity + low-grade fever + photophobia screams subarachnoid hemorrhage and/or meningitis - migraine is a diagnosis of exclusion here.",
+    "CT head non-contrast immediately, lumbar puncture if CT negative, are the indicated red-flag work-up. Discharge without imaging is unsafe.",
+    "OCP use modestly increases SAH risk via venous sinus thrombosis."
+  ]
+}

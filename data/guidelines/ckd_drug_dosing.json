@@ -1,0 +1,15 @@
+{
+  "guideline_id": "ckd_drug_dosing",
+  "title": "Drug dosing in chronic kidney disease",
+  "version": "2024.0 (synthetic / demo only)",
+  "applies_to": ["chronic kidney disease", "renal dosing", "eGFR"],
+  "key_recommendations": [
+    "Metformin contraindicated when eGFR < 30; dose reduce 50% if eGFR 30-45.",
+    "Apixaban 5 mg BID standard; 2.5 mg BID if 2 of: age >=80, weight <=60 kg, Cr >=1.5.",
+    "Rivaroxaban not recommended if CrCl < 15.",
+    "Avoid NSAIDs in eGFR < 30; minimize in eGFR < 60.",
+    "Digoxin highly renally cleared - dose by lean body weight and renal function; risk of toxicity.",
+    "Always re-check renal function before prescribing or dose-adjusting in elderly or recently hospitalized patients."
+  ],
+  "citation_label": "Synthetic CKD Dosing Guideline v2024.0"
+}

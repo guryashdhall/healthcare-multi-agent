@@ -1,0 +1,23 @@
+Patient: Sarah Mitchell
+DOB: 1974-03-18
+MRN: NSH-882391
+Phone: 902-555-0192
+Email: sarah.mitchell@example.com
+Address: 145 Queen Street, Halifax, NS B3J 2H7
+Health Card: NS-1234-567-890
+Provider: Dr. James Carter
+Follow-up: May 4, 2026
+
+Clinical Note:
+Patient presents with worsening shortness of breath and chest tightness over
+the past 72 hours. History of COPD diagnosed eight years ago. Current
+medications include Salbutamol via metered-dose inhaler and Prednisone taper.
+Patient reports increased rescue inhaler use over the past 3 days, now using
+the inhaler approximately every 2-3 hours.
+
+Examination notes mild accessory muscle use, prolonged expiratory phase, and
+expiratory wheeze on auscultation. Oxygen saturation borderline on room air.
+
+Plan: Step up controller therapy, consider short course of oral corticosteroid,
+reinforce inhaler technique, and arrange follow-up with Dr. James Carter in
+one week. Patient counselled on red-flag symptoms.

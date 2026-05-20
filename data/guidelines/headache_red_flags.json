@@ -1,0 +1,14 @@
+{
+  "guideline_id": "headache_red_flags",
+  "title": "Headache: SNNOOP-10 red flags",
+  "version": "2023.3 (synthetic / demo only)",
+  "applies_to": ["headache", "thunderclap headache", "meningitis", "subarachnoid hemorrhage"],
+  "key_recommendations": [
+    "Thunderclap headache (max severity within minutes) requires urgent non-contrast CT head; if CT negative within 6 hours of onset, sensitivity for SAH approaches 100%; LP if CT negative and onset >6 hours.",
+    "Fever + neck stiffness + headache: bacterial or viral meningitis - LP after CT if focal deficits or immunocompromised.",
+    "First or worst headache in patient >50 always warrants imaging.",
+    "Pattern change in chronic headache patient warrants reassessment.",
+    "OCP use, smoking, and dehydration raise risk of cerebral venous sinus thrombosis."
+  ],
+  "citation_label": "Synthetic Headache Guideline v2023.3"
+}

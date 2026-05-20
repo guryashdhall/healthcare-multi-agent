@@ -1,0 +1,14 @@
+{
+  "guideline_id": "polypharmacy_elderly",
+  "title": "Polypharmacy and anticholinergic burden in older adults",
+  "version": "2024.1 (synthetic / demo only)",
+  "applies_to": ["polypharmacy", "anticholinergic", "falls", "cognitive decline", "geriatrics"],
+  "key_recommendations": [
+    "Anticholinergic Cognitive Burden (ACB) score >= 3 is associated with cognitive impairment, falls, and mortality in older adults. Each point increase confers measurable additional risk.",
+    "Common offenders: diphenhydramine, oxybutynin, amitriptyline, hydroxyzine, paroxetine, scopolamine.",
+    "Beers Criteria 2023 specifically discourages: long-term benzodiazepines, first-generation antihistamines, tertiary tricyclic antidepressants in patients >65.",
+    "Before adding new symptomatic therapy (e.g., cholinesterase inhibitor for suspected dementia), deprescribe sedating and anticholinergic medications and reassess after 6-8 weeks.",
+    "Orthostatic hypotension in elderly is iatrogenic until proven otherwise."
+  ],
+  "citation_label": "Synthetic Polypharmacy Guideline v2024.1"
+}
