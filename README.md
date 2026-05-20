@@ -19,6 +19,41 @@ deployment.
 
 ---
 
+## Screenshots
+
+The EMR-styled landing view with the case worklist on the left and the
+engine selector / run controls on the right:
+
+![Landing — case worklist and controls](docs/screenshots/01-landing.png)
+
+A selected case (Whitfield, 68F, new AFib on warfarin) showing
+demographics, history, current medications, and vitals:
+
+![Case detail — Whitfield](docs/screenshots/02-case-detail.png)
+
+The Co-Pilot Workspace after a run: six specialist agents (Triage,
+Differential, Pharmacy, Guidelines, Bias-Check, Communication) all
+populated. The Pharmacy panel surfaces the warfarin–amiodarone
+interaction; the right rail flags it as a cross-agent finding:
+
+![Co-Pilot Workspace](docs/screenshots/03-copilot-workspace.png)
+
+The Plan tab: orchestrator summary, cross-agent flags, ranked actions,
+and a patient-facing summary. The toggle at the top switches between the
+clinician (re-hydrated) view and the placeholder view the LLM actually
+saw:
+
+![Plan — cross-flags and ranked actions](docs/screenshots/04-plan-cross-flags.png)
+
+The Safety & Audit tab: live JSONL audit log with a one-click "Verify no
+raw PHI" assertion that re-runs the same check the pytest suite does
+against the live log. The audit records hold only counts and SHA-256
+hashes — never raw text:
+
+![Safety & Audit — no raw PHI assertion](docs/screenshots/05-safety-audit.png)
+
+---
+
 ## What the application does
 
 A clinician opens a case in an EMR-style UI. The structured case (vitals,
