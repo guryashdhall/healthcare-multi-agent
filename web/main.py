@@ -18,7 +18,7 @@ try:
 except Exception:
     pass
 
-from src.config import AUDIT_LOG_PATH, DEMO_NOTES, RAW_DIR
+from src.config import AUDIT_LOG_PATH, RAW_DIR, SAMPLE_NOTES
 from src.pipeline import run_copilot_streaming, run_pipeline_streaming
 from src.summarization.llm_summarizer import azure_openai_configured
 from src.agents.copilot_runner import DISPLAY_BY_NAME, SPECIALIST_NAMES
@@ -30,7 +30,7 @@ CASES_DIR = Path(__file__).resolve().parent.parent / "data" / "cases"
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
-app = FastAPI(title="Claude Code for Healthcare: PHI-Safe Pipeline Demo")
+app = FastAPI(title="Multi-Agent Clinical Co-Pilot")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
@@ -114,7 +114,7 @@ async def list_cases() -> JSONResponse:
 async def list_notes() -> JSONResponse:
     """Return the preset notes for the patient rail."""
     notes = []
-    for name in DEMO_NOTES:
+    for name in SAMPLE_NOTES:
         path = RAW_DIR / name
         if not path.exists():
             continue
@@ -170,7 +170,7 @@ def _read_known_phi_strings() -> list[str]:
     """Pull the obvious raw-PHI strings out of the synthetic notes for the
     audit-log assertion."""
     needles: set[str] = set()
-    for name in DEMO_NOTES:
+    for name in SAMPLE_NOTES:
         path = RAW_DIR / name
         if not path.exists():
             continue

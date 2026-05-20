@@ -4,8 +4,8 @@ Every specialist agent is the same shape: take a small structured input
 (the de-identified case), call Azure OpenAI with a tight JSON system prompt,
 stream tokens, parse a strict JSON object out. On any failure (timeout,
 bad JSON, API error) the agent falls back to a hand-written offline
-implementation supplied by the specialist module, so the demo never
-hard-fails on stage.
+implementation supplied by the specialist module, so the application
+never hard-fails when the LLM is unavailable.
 """
 
 from __future__ import annotations
@@ -157,7 +157,7 @@ async def simulated_stream(
     """Pretend to stream the JSON output of an offline simulated agent.
 
     Used (a) as the offline-engine choice for the whole co-pilot, and
-    (b) as the fallback when an Azure call fails - so the stage never goes
+    (b) as the fallback when an Azure call fails - so the UI never goes
     blank.
     """
     started = time.monotonic()

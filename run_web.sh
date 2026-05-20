@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Launches the FastAPI demo on http://localhost:8765
+# Launches the FastAPI web app on http://localhost:8765
 set -euo pipefail
 cd "$(dirname "$0")"
 

@@ -111,7 +111,7 @@ async def _run_one_specialist(
                 raise ValueError(f"unknown specialist {name}")
 
             # If Azure failed for any reason, fall back to simulated so the
-            # stage never goes blank.
+            # UI never goes blank.
             if result.error or not result.output:
                 fallback = await _run_one_specialist(
                     name=name,

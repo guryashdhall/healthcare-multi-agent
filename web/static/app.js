@@ -343,7 +343,7 @@ function handleEvent(evt) {
         Agents: evt.data.agent_count ?? "—",
         "Cross-flags": evt.data.cross_flag_count ?? "—",
       });
-      // Auto-jump to the Plan tab once the orchestrator delivers, for stage flow.
+      // Auto-jump to the Plan tab once the orchestrator delivers.
       if (evt.data.status === "completed") {
         setTimeout(() => switchTab("plan"), 400);
       }

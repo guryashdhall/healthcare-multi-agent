@@ -1,10 +1,10 @@
-"""Live demo entrypoint.
+"""CLI entrypoint.
 
 Runs the PHI-safe pipeline against every synthetic note in data/raw/ and
-prints a clean console report. Designed for an AI Tinkerers live demo.
+prints a per-note console report.
 
 Usage:
-    python demo.py
+    python cli.py
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from src.config import AUDIT_LOG_PATH, DEMO_NOTES, PROCESSED_DIR  # noqa: E402
+from src.config import AUDIT_LOG_PATH, PROCESSED_DIR, SAMPLE_NOTES  # noqa: E402
 from src.pipeline import run_pipeline  # noqa: E402
 from src.reporting.console_reporter import (  # noqa: E402
     render_footer,
@@ -27,7 +27,7 @@ from src.reporting.console_reporter import (  # noqa: E402
 
 
 def _reset_outputs() -> None:
-    """Wipe previous demo outputs so each run is clean."""
+    """Wipe previous outputs so each run is clean."""
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     if AUDIT_LOG_PATH.exists():
         AUDIT_LOG_PATH.unlink()
@@ -44,7 +44,7 @@ def main() -> int:
 
     completed = 0
     blocked = 0
-    for name in DEMO_NOTES:
+    for name in SAMPLE_NOTES:
         result = run_pipeline(name)
         print()
         print(render_result(result))
@@ -55,7 +55,7 @@ def main() -> int:
 
     print()
     print("-" * 78)
-    print(f"Notes processed : {len(DEMO_NOTES)}")
+    print(f"Notes processed : {len(SAMPLE_NOTES)}")
     print(f"Completed       : {completed}")
     print(f"Blocked         : {blocked}")
     print(f"Audit log       : {AUDIT_LOG_PATH}")

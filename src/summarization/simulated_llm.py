@@ -1,8 +1,8 @@
 """Offline 'simulated LLM' summarizer.
 
-The real Azure OpenAI summarizer is the source of truth for the live demo.
-This module exists strictly so the **danger toggle** still produces a visible
-PHI leak when the conference Wi-Fi dies on stage.
+The real Azure OpenAI summarizer is the source of truth. This module exists
+as a deterministic fallback when the LLM is unavailable, and so the
+**Safety Gate** toggle still produces a visible PHI leak with no network.
 
 Behaviour:
 - When called on **de-identified** input, it produces a structured summary

@@ -131,11 +131,11 @@ def _summary_preview(summary: dict[str, Any]) -> str:
 def render_header(unicode_ok: bool | None = None) -> str:
     if unicode_ok is None:
         unicode_ok = _supports_unicode()
-    title = "Claude Code for Healthcare: PHI-Safe AI Pipeline Demo"
+    title = "Multi-Agent Clinical Co-Pilot: PHI-Safe Pipeline"
     bar = "#" * 78
     sub = (
-        "Synthetic data only. Demonstration of privacy-preserving engineering "
-        "patterns. Not a HIPAA/PHIPA-compliant system."
+        "Synthetic data only. Privacy-preserving engineering patterns. "
+        "Not a HIPAA/PHIPA-compliant system."
     )
     return f"{bar}\n{title}\n{sub}\n{bar}"
 
