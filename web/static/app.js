@@ -12,6 +12,9 @@ const state = {
   orchestratorRehydrated: null, // rehydrated orchestrator output
   planView: "clinician",        // "clinician" | "llm"
   ws: null,
+  runInProgress: false,         // true between Run click and "done"/blocked event
+  pingTimer: null,              // setInterval handle for keep-alive heartbeat
+  lastRunRequest: null,         // last payload sent, used for one-click retry on disconnect
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -231,25 +234,102 @@ function runCoPilot(c) {
   switchTab("copilot");
 
   setLastRun({ Status: "running", Engine: currentEngine() });
+  hideConnectionBanner();
+  state.runInProgress = true;
 
   if (state.ws) {
     try { state.ws.close(); } catch {}
   }
+  stopHeartbeat();
+
   const proto = location.protocol === "https:" ? "wss:" : "ws:";
   const ws = new WebSocket(`${proto}//${location.host}/ws/run`);
   state.ws = ws;
+  const payload = {
+    mode: "copilot",
+    case_id: c.case_id,
+    case_json: c.case,
+    engine: currentEngine(),
+  };
+  state.lastRunRequest = payload;
+
   ws.onopen = () => {
-    ws.send(JSON.stringify({
-      mode: "copilot",
-      case_id: c.case_id,
-      case_json: c.case,
-      engine: currentEngine(),
-    }));
+    ws.send(JSON.stringify(payload));
+    startHeartbeat(ws);
   };
   ws.onmessage = (msg) => handleEvent(JSON.parse(msg.data));
   ws.onerror = () => logEvent({ type: "ws_error" });
-  ws.onclose = () => logEvent({ type: "ws_closed" });
+  ws.onclose = (ev) => {
+    logEvent({ type: "ws_closed", data: { code: ev.code, reason: ev.reason || null } });
+    stopHeartbeat();
+    // If the connection dropped mid-run (often because the browser tab was
+    // backgrounded for too long and the OS killed the socket), surface a
+    // clear retry banner instead of silently appearing frozen.
+    if (state.runInProgress) {
+      state.runInProgress = false;
+      showConnectionBanner(c);
+    }
+  };
 }
+
+// ─────────────── Keep-alive heartbeat ───────────────
+// Send a ping every 5s while a run is in progress. The server replies "pong"
+// and treats inactivity as a dead client. Without this, Chrome aggressively
+// throttles backgrounded tabs and the WS can be killed within ~30s.
+function startHeartbeat(ws) {
+  stopHeartbeat();
+  state.pingTimer = setInterval(() => {
+    if (ws.readyState === WebSocket.OPEN) {
+      try { ws.send(JSON.stringify({ type: "ping", ts: Date.now() })); } catch {}
+    }
+  }, 5000);
+}
+
+function stopHeartbeat() {
+  if (state.pingTimer) {
+    clearInterval(state.pingTimer);
+    state.pingTimer = null;
+  }
+}
+
+// ─────────────── Disconnect / retry banner ───────────────
+// Surfaces a clear "connection dropped" message at the top of the page when
+// the WebSocket closes mid-run. Styling lives in styles.css (.conn-banner)
+// so this file just manages structure and the retry handler.
+function showConnectionBanner(caseDoc) {
+  let banner = $("#conn-banner");
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.id = "conn-banner";
+    banner.className = "conn-banner";
+    document.body.appendChild(banner);
+  }
+  banner.innerHTML = `
+    <span><b>Connection dropped.</b> Tab backgrounded too long, or network blip.
+    The agents may still be running on the server, but events stopped streaming.</span>
+    <button id="conn-retry" class="retry">Re-run now</button>
+    <button id="conn-dismiss" class="dismiss">Dismiss</button>
+  `;
+  banner.classList.add("visible");
+  $("#conn-retry").onclick = () => {
+    hideConnectionBanner();
+    runCoPilot(caseDoc);
+  };
+  $("#conn-dismiss").onclick = hideConnectionBanner;
+}
+
+function hideConnectionBanner() {
+  const banner = $("#conn-banner");
+  if (banner) banner.classList.remove("visible");
+}
+
+// ─────────────── Page-visibility logging ───────────────
+// Helpful both for debugging on stage and as a hook for any future
+// auto-recover logic. Background tabs in Chrome can have WS reads throttled
+// after ~30s of being hidden.
+document.addEventListener("visibilitychange", () => {
+  logEvent({ type: "tab_visibility", data: { hidden: document.hidden } });
+});
 
 function setLastRun(kv) {
   const t = $("#last-run");
@@ -332,11 +412,19 @@ function handleEvent(evt) {
       break;
 
     case "blocked":
+      state.runInProgress = false;
+      stopHeartbeat();
       $("#plan-summary").textContent = `BLOCKED: ${evt.data.reason}`;
       setLastRun({ Status: "BLOCKED", Reason: evt.data.reason });
       break;
 
+    case "pong":
+      // Keep-alive ack; nothing to render. Counts as activity for tab focus.
+      break;
+
     case "done":
+      state.runInProgress = false;
+      stopHeartbeat();
       setLastRun({
         Status: evt.data.status,
         "Elapsed (ms)": evt.data.elapsed_ms,
@@ -426,7 +514,10 @@ $("#audit-refresh").addEventListener("click", refreshAudit);
 $("#audit-verify").addEventListener("click", refreshAudit);
 
 async function refreshAudit() {
-  const res = await fetch("/api/audit");
+  // Cache-bust on every click so the browser never serves a stale audit view
+  // after a fresh run. Belt-and-suspenders alongside the server's no-store
+  // headers.
+  const res = await fetch(`/api/audit?t=${Date.now()}`, { cache: "no-store" });
   const data = await res.json();
   $("#audit-body").textContent = data.events.length
     ? data.events.map((e) => JSON.stringify(e, null, 2)).join("\n\n")

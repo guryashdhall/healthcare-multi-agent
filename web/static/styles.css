@@ -610,3 +610,42 @@ body { overflow: hidden; }
   font-size: 12.5px; margin-bottom: 12px;
 }
 
+
+/* ─────────── Disconnect / retry banner ───────────
+   Pops at top-of-page when the WebSocket dies mid-run (typically because
+   the browser tab was backgrounded long enough for Chrome to kill the
+   socket). One-click retry re-runs the same case. */
+.conn-banner {
+  position: fixed;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--amber-soft, #fff4e0);
+  border: 1px solid var(--amber, #f59e0b);
+  border-radius: 10px;
+  color: var(--ink, #1f2a44);
+  font: 14px ui-sans-serif, -apple-system, "SF Pro Text", system-ui, sans-serif;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.18);
+  z-index: 9999;
+}
+.conn-banner.visible { display: flex; }
+.conn-banner b { font-weight: 600; }
+.conn-banner button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+.conn-banner .retry {
+  border: 1px solid var(--ink, #0b1220);
+  background: var(--ink, #0b1220);
+  color: #fff;
+}
+.conn-banner .dismiss {
+  border: 1px solid var(--border, #e3e7f0);
+  background: #fff;
+  color: var(--ink, #0b1220);
+}

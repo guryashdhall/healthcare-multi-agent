@@ -134,12 +134,22 @@ async def list_notes() -> JSONResponse:
     return JSONResponse({"notes": notes})
 
 
+# Tell every browser to re-fetch this endpoint every time. Without this the
+# UI's Refresh button can serve a stale cached response after a new run.
+_NO_CACHE_HEADERS = {
+    "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+    "Pragma": "no-cache",
+    "Expires": "0",
+}
+
+
 @app.get("/api/audit")
 async def get_audit() -> JSONResponse:
     """Return the audit log lines + the no-raw-PHI assertion result."""
     if not AUDIT_LOG_PATH.exists():
         return JSONResponse(
-            {"events": [], "phi_check": {"passed": True, "scanned_strings": 0}}
+            {"events": [], "phi_check": {"passed": True, "scanned_strings": 0}},
+            headers=_NO_CACHE_HEADERS,
         )
     events: list[dict[str, Any]] = []
     contents = AUDIT_LOG_PATH.read_text(encoding="utf-8")
@@ -162,14 +172,18 @@ async def get_audit() -> JSONResponse:
                 "scanned_strings": len(phi_strings),
                 "leaked": leaked,
             },
-        }
+        },
+        headers=_NO_CACHE_HEADERS,
     )
 
 
 def _read_known_phi_strings() -> list[str]:
-    """Pull the obvious raw-PHI strings out of the synthetic notes for the
-    audit-log assertion."""
+    """Pull the obvious raw-PHI strings out of the synthetic inputs for the
+    audit-log assertion. Covers both raw text notes and structured case JSONs
+    so the assertion is meaningful for every demo path."""
     needles: set[str] = set()
+
+    # 1) Raw text notes in data/raw/*.txt
     for name in SAMPLE_NOTES:
         path = RAW_DIR / name
         if not path.exists():
@@ -188,21 +202,79 @@ def _read_known_phi_strings() -> list[str]:
                     val = line[len(prefix) :].strip()
                     if val:
                         needles.add(val)
+
+    # 2) Structured cases in data/cases/*.json. The case files carry their
+    # PHI in well-known fields; pull them so a leak via Whitfield/Chen/Singh/
+    # Patel is also caught even though those patients don't have raw .txt notes.
+    if CASES_DIR.exists():
+        for path in sorted(CASES_DIR.glob("*.json")):
+            try:
+                doc = json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                continue
+            demo = doc.get("demographics") or {}
+            for field in ("patient_name", "mrn", "phone", "address", "dob"):
+                val = demo.get(field)
+                if isinstance(val, str) and val.strip():
+                    needles.add(val.strip())
+            # Pull provider names out of medication entries and the clinician's
+            # plan if present.
+            for med in doc.get("current_medications") or []:
+                for k in ("prescriber", "provider"):
+                    val = (med or {}).get(k)
+                    if isinstance(val, str) and val.strip():
+                        needles.add(val.strip())
+
     return [n for n in needles if len(n) >= 5]
 
 
 @app.websocket("/ws/run")
 async def ws_run(ws: WebSocket) -> None:
     await ws.accept()
+
+    # Track whether the WS is alive. If a send fails (typically because the
+    # browser tab was backgrounded long enough for the socket to die), set
+    # this so the run aborts instead of burning compute that nobody sees.
+    ws_alive = {"open": True}
+
+    # Drain any heartbeat/ping messages the client sends so its keep-alive
+    # timer doesn't pile up unread payloads in the receive queue.
+    async def _drain_client_messages() -> None:
+        while ws_alive["open"]:
+            try:
+                msg = await ws.receive_json()
+            except WebSocketDisconnect:
+                ws_alive["open"] = False
+                return
+            except Exception:
+                ws_alive["open"] = False
+                return
+            if isinstance(msg, dict) and msg.get("type") == "ping":
+                try:
+                    await ws.send_json({"type": "pong", "data": {"ts": msg.get("ts")}})
+                except Exception:
+                    ws_alive["open"] = False
+                    return
+
+    drain_task: asyncio.Task | None = None
+
     try:
         request = await ws.receive_json()
         mode: str = request.get("mode", "summary")  # "summary" | "copilot"
 
+        # Start the drain loop only AFTER we've consumed the initial request
+        # payload, so we don't race with it.
+        drain_task = asyncio.create_task(_drain_client_messages())
+
         async def callback(event: dict[str, Any]) -> None:
+            if not ws_alive["open"]:
+                return
             try:
                 await ws.send_json(event)
             except Exception:
-                pass
+                # Mark the connection dead so the rest of the run stops
+                # emitting and the agent fan-out short-circuits next tick.
+                ws_alive["open"] = False
 
         if mode == "copilot":
             case_id: str = request.get("case_id") or "audience_paste"
@@ -243,6 +315,7 @@ async def ws_run(ws: WebSocket) -> None:
                 event_callback=callback,
             )
     except WebSocketDisconnect:
+        ws_alive["open"] = False
         return
     except Exception as exc:  # noqa: BLE001
         try:
@@ -257,6 +330,9 @@ async def ws_run(ws: WebSocket) -> None:
         except Exception:
             pass
     finally:
+        ws_alive["open"] = False
+        if drain_task is not None:
+            drain_task.cancel()
         try:
             await asyncio.sleep(0)
             await ws.close()
